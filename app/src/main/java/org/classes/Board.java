@@ -42,6 +42,7 @@ public class Board implements GameBoard{
         } return true;
     }
 
+
     private boolean checkDiagonals(){
         return (board[0][0].fetchSymbol() != ' ' &&
                 board[0][0].fetchSymbol() == board[1][1].fetchSymbol() &&
