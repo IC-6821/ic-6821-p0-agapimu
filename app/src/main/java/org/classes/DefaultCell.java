@@ -1,4 +1,4 @@
-package org.example;
+package org.classes;
 
 public class DefaultCell implements Cell {
     private char state;
@@ -10,7 +10,10 @@ public class DefaultCell implements Cell {
     }
 
     @Override
-    public void changeState(char symbol) { this.state = symbol; }
+    public void changeState(char symbol) {
+        this.state = symbol;
+        available = false;
+    }
 
     @Override
     public char fetchSymbol() { return this.state; }

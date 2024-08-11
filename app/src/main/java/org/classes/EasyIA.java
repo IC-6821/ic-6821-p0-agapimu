@@ -1,13 +1,13 @@
-package org.example;
+package org.classes;
 import java.util.*;
 
 public class EasyIA implements ArtificialIntelligence {
 
-    public EasyIA artificialIntelligence;
+    private EasyIA easyIA;
 
-    public EasyIA getArtificialIntelligence(){
-        if(artificialIntelligence == null) artificialIntelligence = new EasyIA();
-        return artificialIntelligence;
+    public EasyIA getEasyIA() {
+        if(easyIA == null) easyIA = new EasyIA();
+        return easyIA;
     }
     
 //--------------------------------------------------------------------------------------------------------

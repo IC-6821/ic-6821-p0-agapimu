@@ -1,4 +1,4 @@
-package org.example;
+package org.classes;
 
 public interface Cell {
     void changeState(char symbol);

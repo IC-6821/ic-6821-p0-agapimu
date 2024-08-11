@@ -1,4 +1,4 @@
-package org.example;
+package org.classes;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,30 +12,31 @@ public class ConsoleView implements View {
 
     public ConsoleView(){
         board = new String[3][3];
-        for (int i = 0; i < 3; i++) for(int j = 0; j < 3; j++) board[i][j]=" ";
+        for (int i = 0; i < 3; i++) for(int j = 0; j < 3; j++) board[i][j]="   ";
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     @Override
     public void showGame() {
         for (int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++) System.out.print((j != 2)? " |" : " ");
-            if (i != 2) System.out.println("-----------\n");
+            for(int j = 0; j < 3; j++) System.out.print((j != 2)? board[i][j]+"|" : board[i][j]+"\n");
+            if (i != 2) System.out.println("-----------");
         }
     }
 
     @Override
     public Coordinate receiveMove() throws IOException{
-        String move = bufferedReader.readLine();
         String[] axes = bufferedReader.readLine().split(" ");
+        if(bijection.get(axes[0])==null || bijection.get(axes[1])==null){
+            outPutMessage("Jugada ilegal!");return receiveMove();}
         return new Coordinate(bijection.get(axes[0]), bijection.get(axes[1]));
     }
 
     @Override
-    public void PutO(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = "O"; }
+    public void putO(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = " O "; }
 
     @Override
-    public void PutX(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = "X"; }
+    public void putX(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = " X "; }
 
     @Override
     public void showPlayerWin() { System.out.println("Has ganado!"); }

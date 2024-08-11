@@ -1,4 +1,4 @@
-package org.example;
+package org.classes;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ public class DefaultMatch implements Match {
     final private ArtificialIntelligence artificialIntelligence;
     int matchState;
 
-    public DefaultMatch() {
-        artificialIntelligence = new ArtificialIntelligence();
+    public DefaultMatch(String difficulty) {
+        artificialIntelligence = new EasyIA();
         gameBoard = new Board();
         view = new ConsoleView();
         matchState = 0;
@@ -21,12 +21,12 @@ public class DefaultMatch implements Match {
             view.outPutMessage("La casilla solicitada no es válida, favor digite otra");
             coordinate = view.receiveMove();
         }
-        gameBoard.placeCell(coordinate,'X');
+        gameBoard.placeCellX(coordinate,view);
         matchState = gameBoard.isGameOver();
     }
 
     private void IAMove() throws IOException{
-        gameBoard.placeCell(artificialIntelligence.selectCell(gameBoard),'O');
+        gameBoard.placeCellO(artificialIntelligence.selectCell(gameBoard),view);
         matchState = gameBoard.isGameOver();
     }
 
