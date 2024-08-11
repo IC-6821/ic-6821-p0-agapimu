@@ -75,3 +75,4 @@ public class Board implements GameBoard{
         view.putO(coordinate);
     }
 }
+
