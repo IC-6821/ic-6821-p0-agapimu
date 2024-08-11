@@ -1,4 +1,6 @@
-package org.classes;
+package interfaces;
+
+import org.classes.Coordinate;
 
 import java.io.IOException;
 

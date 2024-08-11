@@ -1,4 +1,6 @@
-package org.classes;
+package interfaces;
+
+import org.classes.Coordinate;
 
 public interface GameBoard {
     void show(View view);

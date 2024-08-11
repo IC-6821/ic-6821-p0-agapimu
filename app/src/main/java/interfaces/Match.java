@@ -1,4 +1,4 @@
-package org.classes;
+package interfaces;
 
 import java.io.IOException;
 

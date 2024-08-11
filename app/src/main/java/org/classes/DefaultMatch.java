@@ -1,5 +1,9 @@
 package org.classes;
 
+import interfaces.ArtificialIntelligence;
+import interfaces.Match;
+import interfaces.View;
+
 import java.io.IOException;
 
 public class DefaultMatch implements Match {

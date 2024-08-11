@@ -1,4 +1,6 @@
 package org.classes;
+import interfaces.View;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

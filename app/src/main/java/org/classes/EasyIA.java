@@ -1,4 +1,6 @@
 package org.classes;
+import interfaces.ArtificialIntelligence;
+
 import java.util.*;
 
 public class EasyIA implements ArtificialIntelligence {
