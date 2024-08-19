@@ -66,7 +66,7 @@ public class Board implements GameBoard {
         return 0;
     }
 
-    public void placeCellX(Coordinate coordinate, View view){
+    public void placeCellX(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
         board[x][y].changeState('X');
