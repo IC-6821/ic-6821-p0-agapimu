@@ -72,7 +72,7 @@ public class Board implements GameBoard {
         board[x][y].changeState('X');
         view.putX(coordinate);
     }
-    public void placeCellO(Coordinate coordinate, View view){
+    public void placeCellO(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
         board[x][y].changeState('O');
