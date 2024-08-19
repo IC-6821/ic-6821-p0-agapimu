@@ -60,7 +60,7 @@ public class Board implements GameBoard {
         return board[coordinate.row()][coordinate.column()].isAvailable();
     }
 
-    public int isGameOver(){
+    public int isGameOver() {
         if(checkColumns() || checkDiagonals() || checkRows()) return 1;
         if(isFull()) return 2;
         return 0;
