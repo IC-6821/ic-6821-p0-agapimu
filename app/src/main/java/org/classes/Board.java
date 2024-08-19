@@ -8,7 +8,7 @@ public class Board implements GameBoard {
 
     private Cell[][] board;
 
-    public Board(){
+    public Board() {
         board = new DefaultCell[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
