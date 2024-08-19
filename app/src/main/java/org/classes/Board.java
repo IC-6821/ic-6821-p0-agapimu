@@ -21,7 +21,7 @@ public class Board implements GameBoard {
         view.showGame();
     }
 
-    private boolean checkRows(){
+    private boolean checkRows() {
         for (int i = 0; i < 3; i++) {
             char symbol = board[i][0].fetchSymbol();
             if ( symbol != ' ' && symbol == board[i][1].fetchSymbol() && symbol == board[i][2].fetchSymbol()) return true;
