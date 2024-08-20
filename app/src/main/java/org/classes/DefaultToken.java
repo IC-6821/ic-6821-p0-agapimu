@@ -1,8 +1,8 @@
 package org.classes;
 
-public class DefaultToken implements Token {
+public final class DefaultToken implements Token {
 
-    TokenState state;
+    private TokenState state;
 
     @Override
     public void changeState(TokenState symbol) {
