@@ -1,15 +1,12 @@
 package org.classes;
 
 public final class DefaultMatch implements Match {
-    private final View VIEW;
-    private final Board GAMEBOARD;
-    private final MoveMaker MOVEMAKER;
+    private static final View VIEW = new ConsoleView();
+    private static final Board GAMEBOARD = new Board();
+    private static final MoveMaker MOVEMAKER = new EasyAI();
     private GameState currentState;
 
     public DefaultMatch(final String difficulty) {
-        MOVEMAKER = new EasyAI();
-        GAMEBOARD = new Board();
-        VIEW = new ConsoleView();
         currentState = GameState.CONTINUE;
     }
 
