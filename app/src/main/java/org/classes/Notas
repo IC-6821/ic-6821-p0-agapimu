@@ -1,0 +1,16 @@
+INTERFACES
+- GameBoard - show, isGameOver(), placeToken
+- Player - selectCell(),
+- Match - receiveMove, thereIsWinner
+- Cell - changeState, isAvaliable
+- View show, recibeMove
+
+CLASS
+- Person implements Player --> atributos?
+- IA implements Player -->
+- DefaultMatch implements Match -->
+- DefaultCell -->
+- DefaultView
+
+RECORDS
+- Coordenate
