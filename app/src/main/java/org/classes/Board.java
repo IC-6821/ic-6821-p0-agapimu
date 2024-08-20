@@ -2,7 +2,7 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    private Token[][] board;.
+    private Token[][] board;
     final int MAX_ROWS=3;
     final int MAX_COLUMNS=3;
     public Board() {
@@ -20,8 +20,8 @@ public class Board implements GameBoard {
 
     private boolean checkRows() {
         for (int i = 0; i < MAX_ROWS; i++) {
-            TokenState symbol = board[i][Column.LEFT].fetchSymbol();
-            if (symbol != null && symbol == board[i][Column.CENTER].fetchSymbol() && symbol == board[i][Column.RIGHT].fetchSymbol()) return true;
+            TokenState symbol = board[i][Column.LEFT.ordinal()].fetchSymbol();
+            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol()) return true;
         }
         return false;
     }
@@ -29,8 +29,8 @@ public class Board implements GameBoard {
 
     private boolean checkColumns() {
         for (int j = 0; j < MAX_COLUMNS; j++) {
-            TokenState symbol = board[Row.UP][j].fetchSymbol();
-            if (symbol != null && symbol == board[Row.MID][j].fetchSymbol() && symbol == board[Row.DOWN][j].fetchSymbol()) return true;
+            TokenState symbol = board[Row.UP.ordinal()][j].fetchSymbol();
+            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol()) return true;
         }
         return false;
     }
@@ -45,19 +45,19 @@ public class Board implements GameBoard {
 
 
     private boolean checkDiagonal() {
-        return (board[Row.UP][Column.LEFT].fetchSymbol() != null &&
-                board[Row.UP][Column.LEFT].fetchSymbol() == board[Row.MID][Column.CENTER].fetchSymbol() &&
-                board[Row.MID][Column.CENTER].fetchSymbol() == board[Row.DOWN][Column.RIGHT].fetchSymbol());
+        return (board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null &&
+                board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol() &&
+                board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol() == board[Row.DOWN.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
     }
 
     private boolean checkReverseDiagonal() {
-        return (board[Row.DOWN][Column.LEFT].fetchSymbol() != null &&
-                board[Row.DOWN][Column.LEFT].fetchSymbol() == board[Row.MID][Column.CENTER].fetchSymbol()) &&
-                (board[Row.DOWN][Column.LEFT].fetchSymbol() == board[Row.UP][Column.RIGHT].fetchSymbol());
+        return (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null &&
+                board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol()) &&
+                (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.UP.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
     }
 
     public boolean isFree(Coordinate coordinate){
-        return board[coordinate.row()][coordinate.column()].isAvailable();
+        return board[coordinate.row().ordinal()][coordinate.column().ordinal()] != null;
     }
 
     public int isGameOver() {
@@ -67,24 +67,24 @@ public class Board implements GameBoard {
     }
 
     public void placeTokenX(Coordinate coordinate, View view) {
-        int x = coordinate.row();
-        int y = coordinate.column();
-        board[x][y].changeState(State.TOKEN_X);
+        int x = coordinate.row().ordinal();
+        int y = coordinate.column().ordinal();
+        board[x][y].changeState(TokenState.TOKEN_X);
         view.putX(coordinate);
     }
     public void placeTokenO(Coordinate coordinate, View view) {
-        int x = coordinate.row();
-        int y = coordinate.column();
-        board[x][y].changeState(State.TOKEN_O);
+        int x = coordinate.row().ordinal();
+        int y = coordinate.column().ordinal();
+        board[x][y].changeState(TokenState.TOKEN_O);
         view.putO(coordinate);
     }
 
     public boolean isBoundRow(int x) {
-        return x<MAX_ROWS;
+        return x < MAX_ROWS;
     }
 
     public boolean isBoundColumn(int x) {
-        return x<MAX_COLUMNS;
+        return x < MAX_COLUMNS;
     }
 
 }
