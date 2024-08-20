@@ -3,50 +3,63 @@ package org.classes;
 import java.io.IOException;
 
 public class DefaultMatch implements Match {
-    final private View view;
-    final private Board gameBoard;
-    final private ArtificialIntelligence artificialIntelligence;
-    int matchState;
+    final private View VIEW;
+    final private Board GAMEBOARD;
+    final private MoveMaker MOVEMAKER;
+    GameState currentState;
 
     public DefaultMatch(String difficulty) {
-        artificialIntelligence = new EasyIA();
-        gameBoard = new Board();
-        view = new ConsoleView();
-        matchState = 0;
+        MOVEMAKER = new EasyAI();
+        GAMEBOARD = new Board();
+        VIEW = new ConsoleView();
+        currentState = GameState.CONTINUE;
     }
 
-    private void validPlayerMove() throws IOException{
-        Coordinate coordinate = view.receiveMove();
-        while(!gameBoard.isFree(coordinate)){
-            view.outPutMessage("La casilla solicitada no es válida, favor digite otra");
-            coordinate = view.receiveMove();
+    private void validPlayerMove() throws IOException {
+        Coordinate coordinate = VIEW.receiveMove();
+        while (!GAMEBOARD.isFree(coordinate)) {
+            VIEW.outPutMessage("La casilla solicitada no es válida, favor digite otra");
+            coordinate = VIEW.receiveMove();
         }
-        gameBoard.placeCellX(coordinate,view);
-        matchState = gameBoard.isGameOver();
+        GAMEBOARD.placeCellX(coordinate, VIEW);
+        currentState = GAMEBOARD.isGameOver();
     }
 
-    private void IAMove() throws IOException{
-        gameBoard.placeCellO(artificialIntelligence.selectCell(gameBoard),view);
-        matchState = gameBoard.isGameOver();
+    private void IAMove() throws IOException {
+        GAMEBOARD.placeCellO(MOVEMAKER.placeToken(GAMEBOARD), VIEW);
+        currentState = GAMEBOARD.isGameOver();
     }
 
-    public void start() throws IOException{
-        while(matchState == 0) {
-            view.showGame();
+    public void start() throws IOException {
+        while (currentState == GameState.CONTINUE) {
+            VIEW.showGame();
             validPlayerMove();
-            if(matchState != 0) break;
+            if (currentState == GameState.SOMEONE_WIN) {
+                currentState = GameState.PLAYER_WIN;
+                continue;
+            }
+            if (currentState == GameState.TIE) {
+                continue;
+            }
             IAMove();
-            if(matchState != 0) matchState = 3;
+            if (currentState == GameState.SOMEONE_WIN) {
+                currentState = GameState.AI_WIN;
+            }
         }
-        view.showGame();
+        VIEW.showGame();
         showResult();
     }
 
-    private void showResult(){
-        switch (matchState) {
-            case 1: view.showPlayerWin(); break;
-            case 2: view.showTie(); break;
-            default: view.showArtificialIntelligenceWin();
+    private void showResult() {
+        switch (currentState) {
+            case PLAYER_WIN:
+                VIEW.showPlayerWin();
+                break;
+            case TIE:
+                VIEW.showTie();
+                break;
+            default:
+                VIEW.showArtificialIntelligenceWin();
         }
     }
 }
