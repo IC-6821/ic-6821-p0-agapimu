@@ -1,3 +1,3 @@
 package org.classes;
 
-public record Coordinate (int row, int column) {};
+public record Coordinate (Row row, Column column) {};
