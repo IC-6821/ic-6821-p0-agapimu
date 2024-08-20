@@ -2,13 +2,14 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    private Cell[][] board;
-
+    private Token[][] board;
+    final int MAX_ROWS=3;
+    final int MAX_COLUMNS=3;
     public Board() {
-        board = new DefaultCell[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = new DefaultCell();
+        board = new DefaultToken[MAX_ROWS][MAX_COLUMNS];
+        for (int i = 0; i < MAX_ROWS; i++) {
+            for (int j = 0; j < MAX_COLUMNS; j++) {
+                board[i][j] = new DefaultToken();
             }
         }
     }
@@ -18,38 +19,41 @@ public class Board implements GameBoard {
     }
 
     private boolean checkRows() {
-        for (int i = 0; i < 3; i++) {
-            char symbol = board[i][0].fetchSymbol();
-            if ( symbol != ' ' && symbol == board[i][1].fetchSymbol() && symbol == board[i][2].fetchSymbol()) return true;
+        for (int i = 0; i < MAX_ROWS; i++) {
+            TokenState symbol = board[i][Column.LEFT].fetchSymbol();
+            if (symbol != null && symbol == board[i][Column.CENTER].fetchSymbol() && symbol == board[i][Column.RIGHT].fetchSymbol()) return true;
         }
         return false;
     }
 
 
     private boolean checkColumns() {
-        for (int j = 0; j < 3; j++) {
-            char symbol = board[0][j].fetchSymbol();
-            if (symbol != ' ' && symbol == board[1][j].fetchSymbol() && symbol == board[2][j].fetchSymbol()) return true;
+        for (int j = 0; j < MAX_COLUMNS; j++) {
+            TokenState symbol = board[Row.UP][j].fetchSymbol();
+            if (symbol != null && symbol == board[Row.MID][j].fetchSymbol() && symbol == board[Row.DOWN][j].fetchSymbol()) return true;
         }
         return false;
     }
 
 
     public boolean isFull(){
-        for (int i=0; i<3; i++) {
-            for (int j = 0; j < 3; j++)
-                if (board[i][j].isAvailable()) return false;
+        for (int i=0; i<MAX_ROWS; i++) {
+            for (int j = 0; j < MAX_COLUMNS; j++)
+                if (board[i][j] != null) return false;
         } return true;
     }
 
 
-    private boolean checkDiagonals() {
-        return (board[0][0].fetchSymbol() != ' ' &&
-                board[0][0].fetchSymbol() == board[1][1].fetchSymbol() &&
-                board[1][1].fetchSymbol() == board[2][2].fetchSymbol()) ||
-                (board[2][0].fetchSymbol() != ' ' &&
-                board[2][0].fetchSymbol() == board[1][1].fetchSymbol()) &&
-                (board[2][0].fetchSymbol() == board[0][2].fetchSymbol());
+    private boolean checkDiagonal() {
+        return (board[Row.UP][Column.LEFT].fetchSymbol() != null &&
+                board[Row.UP][Column.LEFT].fetchSymbol() == board[Row.MID][Column.CENTER].fetchSymbol() &&
+                board[Row.MID][Column.CENTER].fetchSymbol() == board[Row.DOWN][Column.RIGHT].fetchSymbol());
+    }
+
+    private boolean checkReverseDiagonal() {
+        return (board[Row.DOWN][Column.LEFT].fetchSymbol() != null &&
+                board[Row.DOWN][Column.LEFT].fetchSymbol() == board[Row.MID][Column.CENTER].fetchSymbol()) &&
+                (board[Row.DOWN][Column.LEFT].fetchSymbol() == board[Row.UP][Column.RIGHT].fetchSymbol());
     }
 
     public boolean isFree(Coordinate coordinate){
@@ -57,22 +61,31 @@ public class Board implements GameBoard {
     }
 
     public int isGameOver() {
-        if(checkColumns() || checkDiagonals() || checkRows()) return 1;
+        if(checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return 1;
         if(isFull()) return 2;
         return 0;
     }
 
-    public void placeCellX(Coordinate coordinate, View view) {
+    public void placeTokenX(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
-        board[x][y].changeState('X');
+        board[x][y].changeState(State.TOKEN_X);
         view.putX(coordinate);
     }
-    public void placeCellO(Coordinate coordinate, View view) {
+    public void placeTokenO(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
-        board[x][y].changeState('O');
+        board[x][y].changeState(State.TOKEN_O);
         view.putO(coordinate);
     }
+
+    public boolean isBoundRow(int x) {
+        return x<MAX_ROWS;
+    }
+
+    public boolean isBoundColumn(int x) {
+        return x<MAX_COLUMNS;
+    }
+
 }
 

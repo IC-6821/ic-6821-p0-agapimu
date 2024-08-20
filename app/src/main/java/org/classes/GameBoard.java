@@ -3,6 +3,10 @@ package org.classes;
 public interface GameBoard {
     void show(View view);
     int isGameOver();
-    void placeCellX(Coordinate coordinate, View view);
-    void placeCellO(Coordinate coordinate, View view);
+
+    boolean isBoundRow(int x);
+
+    boolean isBoundColumn(int x);
+    void placeTokenX(Coordinate coordinate, View view);
+    void placeTokenO(Coordinate coordinate, View view);
 }
