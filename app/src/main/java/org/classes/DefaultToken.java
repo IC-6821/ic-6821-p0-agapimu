@@ -10,6 +10,8 @@ public class DefaultToken implements Token {
     }
 
     @Override
-    public TokenState fetchSymbol() { return this.state; }
+    public TokenState fetchSymbol() {
+        return this.state;
+    }
 
 }

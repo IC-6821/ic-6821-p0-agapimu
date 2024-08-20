@@ -16,4 +16,7 @@ public class App {
         }
     }
 
+    public Object getGreeting() {
+        return "Hello World!";
+    }
 }

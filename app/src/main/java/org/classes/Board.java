@@ -2,11 +2,12 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    final private Token[][] board;
-    final int MAX_ROWS=3;
-    final int MAX_COLUMNS=3;
+    final int MAX_ROWS = 3;
+    final int MAX_COLUMNS = 3;
     final int X = 0;
     final int O = 1;
+    final private Token[][] board;
+
     public Board() {
         board = new DefaultToken[MAX_ROWS][MAX_COLUMNS];
         for (int i = 0; i < MAX_ROWS; i++) {
@@ -16,14 +17,15 @@ public class Board implements GameBoard {
         }
     }
 
-    public void show(View view){
+    public void show(View view) {
         view.showGame(this);
     }
 
     private boolean checkRows() {
         for (int i = 0; i < MAX_ROWS; i++) {
             TokenState symbol = board[i][Column.LEFT.ordinal()].fetchSymbol();
-            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol()) return true;
+            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol())
+                return true;
         }
         return false;
     }
@@ -32,17 +34,19 @@ public class Board implements GameBoard {
     private boolean checkColumns() {
         for (int j = 0; j < MAX_COLUMNS; j++) {
             TokenState symbol = board[Row.UP.ordinal()][j].fetchSymbol();
-            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol()) return true;
+            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol())
+                return true;
         }
         return false;
     }
 
 
-    private boolean isFull(){
-        for (int i=0; i<MAX_ROWS; i++) {
+    private boolean isFull() {
+        for (int i = 0; i < MAX_ROWS; i++) {
             for (int j = 0; j < MAX_COLUMNS; j++)
                 if (board[i][j].fetchSymbol() == null) return false;
-        } return true;
+        }
+        return true;
     }
 
 
@@ -58,13 +62,13 @@ public class Board implements GameBoard {
                 (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.UP.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
     }
 
-    public boolean isFree(Coordinate coordinate){
-        return board[coordinate.row().ordinal()][coordinate.column().ordinal()].fetchSymbol()==null;
+    public boolean isFree(Coordinate coordinate) {
+        return board[coordinate.row().ordinal()][coordinate.column().ordinal()].fetchSymbol() == null;
     }
 
     public GameState isGameOver() {
-        if(checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return GameState.SOMEONE_WIN;
-        if(isFull()) return GameState.TIE;
+        if (checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return GameState.SOMEONE_WIN;
+        if (isFull()) return GameState.TIE;
         return GameState.CONTINUE;
     }
 
@@ -73,6 +77,7 @@ public class Board implements GameBoard {
         int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_X);
     }
+
     public void placeTokenO(Coordinate coordinate, View view) {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
