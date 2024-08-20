@@ -38,10 +38,10 @@ public class Board implements GameBoard {
     }
 
 
-    public boolean isFull(){
+    private boolean isFull(){
         for (int i=0; i<MAX_ROWS; i++) {
             for (int j = 0; j < MAX_COLUMNS; j++)
-                if (board[i][j] != null) return false;
+                if (board[i][j].fetchSymbol() == null) return false;
         } return true;
     }
 
@@ -65,7 +65,7 @@ public class Board implements GameBoard {
     public GameState isGameOver() {
         if(checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return GameState.SOMEONE_WIN;
         if(isFull()) return GameState.TIE;
-        return GameState.TIE;
+        return GameState.CONTINUE;
     }
 
     public void placeTokenX(Coordinate coordinate, View view) {
