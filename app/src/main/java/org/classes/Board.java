@@ -70,19 +70,27 @@ public class Board implements GameBoard {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_X);
+<<<<<<< HEAD
+=======
+        view.putX(coordinate);
+>>>>>>> ae576ca981ec23a657fd45996476b17cc877e629
     }
     public void placeTokenO(Coordinate coordinate, View view) {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_O);
+<<<<<<< HEAD
+=======
+        view.putO(coordinate);
+>>>>>>> ae576ca981ec23a657fd45996476b17cc877e629
     }
 
     public boolean isBoundRow(int x) {
-        return x<MAX_ROWS;
+        return x < MAX_ROWS;
     }
 
     public boolean isBoundColumn(int x) {
-        return x<MAX_COLUMNS;
+        return x < MAX_COLUMNS;
     }
 
 }

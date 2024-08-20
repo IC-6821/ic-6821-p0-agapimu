@@ -1,7 +1,5 @@
 package org.classes;
 
-import java.io.IOException;
-
 public class DefaultMatch implements Match {
     final private View VIEW;
     final private Board GAMEBOARD;
@@ -15,24 +13,24 @@ public class DefaultMatch implements Match {
         currentState = GameState.CONTINUE;
     }
 
-    private void validPlayerMove() throws IOException {
+    private void validPlayerMove() {
         Coordinate coordinate = VIEW.receiveMove();
         while (!GAMEBOARD.isFree(coordinate)) {
-            VIEW.outPutMessage("La casilla solicitada no es válida, favor digite otra");
+            VIEW.showUsedPosition();
             coordinate = VIEW.receiveMove();
         }
-        GAMEBOARD.placeCellX(coordinate, VIEW);
+        GAMEBOARD.placeTokenX(coordinate, VIEW);
         currentState = GAMEBOARD.isGameOver();
     }
 
-    private void IAMove() throws IOException {
-        GAMEBOARD.placeCellO(MOVEMAKER.placeToken(GAMEBOARD), VIEW);
+    private void IAMove() {
+        GAMEBOARD.placeTokenO(MOVEMAKER.placeToken(GAMEBOARD), VIEW);
         currentState = GAMEBOARD.isGameOver();
     }
 
-    public void start() throws IOException {
+    public void start() {
         while (currentState == GameState.CONTINUE) {
-            VIEW.showGame();
+            VIEW.showGame(GAMEBOARD);
             validPlayerMove();
             if (currentState == GameState.SOMEONE_WIN) {
                 currentState = GameState.PLAYER_WIN;
@@ -46,7 +44,7 @@ public class DefaultMatch implements Match {
                 currentState = GameState.AI_WIN;
             }
         }
-        VIEW.showGame();
+        VIEW.showGame(GAMEBOARD);
         showResult();
     }
 
