@@ -21,7 +21,7 @@ public class ConsoleView implements View {
     public void showGame(GameBoard gameBoard) {
         for(int i=0; gameBoard.isBoundRow(i); i++){
             for(int j=0; gameBoard.isBoundColumn(j); j++){
-                Coordinate coordinate=new Coordinate(i, j);
+                Coordinate coordinate=new Coordinate(Row.values()[i], Column.values()[j]);
                 if(gameBoard.isFree(coordinate)) showEmpty();
                 if(gameBoard.isX()) showX();
                 if(gameBoard.isO()) showO();
@@ -35,13 +35,16 @@ public class ConsoleView implements View {
 
     @Override
     public Coordinate receiveMove() {
+        System.out.println("> ");
         String line = scanner.nextLine();
         String[] tokens = line.split(" ");
         if(!validTokenInput(tokens[0]) || !validTokenInput(tokens[1])) {
             showInvalidInput();
             return receiveMove();
         }
-        return new Coordinate(bijection.get(tokens[0]), bijection.get(tokens[1]));
+        int posRow=bijection.get(tokens[0]);
+        int posCol=bijection.get(tokens[1]);
+        return new Coordinate(Row.values()[posRow], Column.values()[posCol]);
     }
 
     private void showO() {
