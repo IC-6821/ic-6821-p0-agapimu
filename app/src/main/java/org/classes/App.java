@@ -11,10 +11,8 @@ public class App {
             }
             Match match = new DefaultMatch(args[1]);
             match.start();
-        } catch (IncorrectDifficultyException e) {
-            throw new RuntimeException(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
