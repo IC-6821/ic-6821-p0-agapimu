@@ -20,13 +20,23 @@ public class ConsoleView implements View {
     @Override
     public void showGame(GameBoard gameBoard) {
         for (int i = 0; gameBoard.isBoundRow(i); i++) {
-            if (i > 0) System.out.println("-----------");
+            if (i > 0) {
+                System.out.println("-----------");
+            }
             for (int j = 0; gameBoard.isBoundColumn(j); j++) {
-                if (j > 0) System.out.print("|");
+                if (j > 0) {
+                    System.out.print("|");
+                }
                 Coordinate coordinate = new Coordinate(Row.values()[i], Column.values()[j]);
-                if (gameBoard.isFree(coordinate)) showEmpty();
-                else if (gameBoard.isX(coordinate)) showX();
-                else if (gameBoard.isO(coordinate)) showO();
+                if (gameBoard.isFree(coordinate)) {
+                    showEmpty();
+                }
+                else if (gameBoard.isX(coordinate)) {
+                    showX();
+                }
+                else if (gameBoard.isO(coordinate)) {
+                    showO();
+                }
             }
             System.out.println();
         }
