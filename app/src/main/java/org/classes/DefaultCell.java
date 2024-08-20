@@ -1,7 +1,5 @@
 package org.classes;
 
-import interfaces.Cell;
-
 public class DefaultCell implements Cell {
     private char state;
     private boolean available;

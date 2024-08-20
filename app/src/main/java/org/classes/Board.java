@@ -1,9 +1,5 @@
 package org.classes;
 
-import interfaces.Cell;
-import interfaces.GameBoard;
-import interfaces.View;
-
 public class Board implements GameBoard {
 
     private Cell[][] board;

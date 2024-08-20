@@ -1,5 +1,4 @@
 package org.classes;
-import interfaces.ArtificialIntelligence;
 
 import java.util.*;
 
