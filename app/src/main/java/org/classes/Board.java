@@ -24,8 +24,9 @@ public class Board implements GameBoard {
     private boolean checkRows() {
         for (int i = 0; i < MAX_ROWS; i++) {
             TokenState symbol = board[i][Column.LEFT.ordinal()].fetchSymbol();
-            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol())
+            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol()){
                 return true;
+            }
         }
         return false;
     }
@@ -34,8 +35,9 @@ public class Board implements GameBoard {
     private boolean checkColumns() {
         for (int j = 0; j < MAX_COLUMNS; j++) {
             TokenState symbol = board[Row.UP.ordinal()][j].fetchSymbol();
-            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol())
+            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol()){
                 return true;
+            }
         }
         return false;
     }
@@ -43,8 +45,9 @@ public class Board implements GameBoard {
 
     private boolean isFull() {
         for (int i = 0; i < MAX_ROWS; i++) {
-            for (int j = 0; j < MAX_COLUMNS; j++)
+            for (int j = 0; j < MAX_COLUMNS; j++) {
                 if (board[i][j].fetchSymbol() == null) return false;
+            }
         }
         return true;
     }
@@ -67,8 +70,12 @@ public class Board implements GameBoard {
     }
 
     public GameState isGameOver() {
-        if (checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return GameState.SOMEONE_WIN;
-        if (isFull()) return GameState.TIE;
+        if (checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()){
+            return GameState.SOMEONE_WIN;
+        }
+        if (isFull()){
+            return GameState.TIE;
+        }
         return GameState.CONTINUE;
     }
 
