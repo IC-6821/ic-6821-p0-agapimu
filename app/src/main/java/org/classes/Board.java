@@ -4,7 +4,7 @@ public class Board implements GameBoard {
 
     private Cell[][] board;
 
-    public Board(){
+    public Board() {
         board = new DefaultCell[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -17,7 +17,7 @@ public class Board implements GameBoard {
         view.showGame();
     }
 
-    private boolean checkRows(){
+    private boolean checkRows() {
         for (int i = 0; i < 3; i++) {
             char symbol = board[i][0].fetchSymbol();
             if ( symbol != ' ' && symbol == board[i][1].fetchSymbol() && symbol == board[i][2].fetchSymbol()) return true;
@@ -43,7 +43,7 @@ public class Board implements GameBoard {
     }
 
 
-    private boolean checkDiagonals(){
+    private boolean checkDiagonals() {
         return (board[0][0].fetchSymbol() != ' ' &&
                 board[0][0].fetchSymbol() == board[1][1].fetchSymbol() &&
                 board[1][1].fetchSymbol() == board[2][2].fetchSymbol()) ||
@@ -56,19 +56,19 @@ public class Board implements GameBoard {
         return board[coordinate.row()][coordinate.column()].isAvailable();
     }
 
-    public int isGameOver(){
+    public int isGameOver() {
         if(checkColumns() || checkDiagonals() || checkRows()) return 1;
         if(isFull()) return 2;
         return 0;
     }
 
-    public void placeCellX(Coordinate coordinate, View view){
+    public void placeCellX(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
         board[x][y].changeState('X');
         view.putX(coordinate);
     }
-    public void placeCellO(Coordinate coordinate, View view){
+    public void placeCellO(Coordinate coordinate, View view) {
         int x = coordinate.row();
         int y = coordinate.column();
         board[x][y].changeState('O');
