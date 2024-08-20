@@ -49,14 +49,14 @@ public class ConsoleView implements View {
     @Override
     public Coordinate receiveMove() {
         System.out.print("> ");
-        String line = scanner.nextLine();
-        String[] tokens = line.split(" ");
+        final String line = scanner.nextLine();
+        final String[] tokens = line.split(" ");
         if (notValidTokenInput(tokens[0]) || notValidTokenInput(tokens[1])) {
             showInvalidInput();
             return receiveMove();
         }
-        int posRow = bijection.get(tokens[0]);
-        int posCol = bijection.get(tokens[1]);
+        final int posRow = bijection.get(tokens[0]);
+        final int posCol = bijection.get(tokens[1]);
         return new Coordinate(Row.values()[posRow], Column.values()[posCol]);
     }
 
