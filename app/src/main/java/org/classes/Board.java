@@ -2,11 +2,11 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    final int MAX_ROWS = 3;
-    final int MAX_COLUMNS = 3;
-    final int X = 0;
-    final int O = 1;
-    final private Token[][] board;
+    private final int MAX_ROWS = 3;
+    private final int MAX_COLUMNS = 3;
+    private final int X = 0;
+    private final int O = 1;
+    private final Token[][] board;
 
     public Board() {
         board = new DefaultToken[MAX_ROWS][MAX_COLUMNS];

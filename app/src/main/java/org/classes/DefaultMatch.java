@@ -1,12 +1,12 @@
 package org.classes;
 
-public class DefaultMatch implements Match {
-    final private View VIEW;
-    final private Board GAMEBOARD;
-    final private MoveMaker MOVEMAKER;
-    GameState currentState;
+public final class DefaultMatch implements Match {
+    private final View VIEW;
+    private final Board GAMEBOARD;
+    private final MoveMaker MOVEMAKER;
+    private GameState currentState;
 
-    public DefaultMatch(String difficulty) {
+    public DefaultMatch(final String difficulty) {
         MOVEMAKER = new EasyAI();
         GAMEBOARD = new Board();
         VIEW = new ConsoleView();
@@ -23,7 +23,7 @@ public class DefaultMatch implements Match {
         currentState = GAMEBOARD.isGameOver();
     }
 
-    private void IAMove() {
+    private void aiMove() {
         GAMEBOARD.placeTokenO(MOVEMAKER.placeToken(GAMEBOARD), VIEW);
         currentState = GAMEBOARD.isGameOver();
     }
@@ -39,7 +39,7 @@ public class DefaultMatch implements Match {
             if (currentState == GameState.TIE) {
                 continue;
             }
-            IAMove();
+            aiMove();
             if (currentState == GameState.SOMEONE_WIN) {
                 currentState = GameState.AI_WIN;
             }
