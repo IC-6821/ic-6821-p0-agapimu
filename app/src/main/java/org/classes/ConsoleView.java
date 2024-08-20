@@ -1,54 +1,83 @@
 package org.classes;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Scanner;
 
 public class ConsoleView implements View {
-    private String[][] board;
-    private BufferedReader bufferedReader;
     private final Map<String, Integer> bijection = Map.of("arriba", 0, "medio", 1,
-            "abajo", 2, "izquierda", 0, "centro", 1,  "derecha", 2);
+            "abajo", 2, "izquierda", 0, "centro", 1, "derecha", 2);
+    private Scanner scanner;
+    private final String INVALID_INPUT_MESSAGE = "Posición incorrecta";
+    private final String PLAYER_WIN_MESSAGE="Has ganado!";
+    private final String PLAYER_LOST_MESSAGE="Has perdido!";
+    private final String TIE_MESSAGE="Has empatado!";
+    private final String USED_POSITION_MESSAGE="La posición ya está ocupada!";
 
-    public ConsoleView(){
-        board = new String[3][3];
-        for (int i = 0; i < 3; i++) for(int j = 0; j < 3; j++) board[i][j]="   ";
-        bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    public ConsoleView() {
+        scanner = new Scanner(System.in);
     }
 
     @Override
-    public void showGame() {
-        for (int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++) System.out.print((j != 2)? board[i][j]+"|" : board[i][j]+"\n");
-            if (i != 2) System.out.println("-----------");
+    public void showGame(GameBoard gameBoard) {
+        for(int i=0; gameBoard.isBoundRow(i); i++){
+            for(int j=0; gameBoard.isBoundColumn(j); j++){
+                Coordinate coordinate=new Coordinate(i, j);
+                if(gameBoard.isFree(coordinate)) showEmpty();
+                if(gameBoard.isX()) showX();
+                if(gameBoard.isO()) showO();
+            }
         }
     }
 
-    @Override
-    public Coordinate receiveMove() throws IOException{
-        String[] axes = bufferedReader.readLine().split(" ");
-        if(bijection.get(axes[0])==null || bijection.get(axes[1])==null){
-            outPutMessage("Jugada ilegal!");return receiveMove();}
-        return new Coordinate(bijection.get(axes[0]), bijection.get(axes[1]));
+    private boolean validTokenInput(String token) {
+        return bijection.containsKey(token);
     }
 
     @Override
-    public void putO(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = " O "; }
+    public Coordinate receiveMove() {
+        String line = scanner.nextLine();
+        String[] tokens = line.split(" ");
+        if(!validTokenInput(tokens[0]) || !validTokenInput(tokens[1])) {
+            showInvalidInput();
+            return receiveMove();
+        }
+        return new Coordinate(bijection.get(tokens[0]), bijection.get(tokens[1]));
+    }
+
+    private void showO() {
+        System.out.println(" O ");
+    }
+
+    private void showX() {
+        System.out.println(" X ");
+    }
+
+    private void showEmpty() {
+        System.out.println("   ");
+    }
 
     @Override
-    public void putX(Coordinate coordinate) { board[coordinate.row()][coordinate.column()] = " X "; }
+    public void showPlayerWin() {
+        System.out.println(PLAYER_WIN_MESSAGE);
+    }
 
     @Override
-    public void showPlayerWin() { System.out.println("Has ganado!"); }
+    public void showArtificialIntelligenceWin() {
+        System.out.println(PLAYER_LOST_MESSAGE);
+    }
 
     @Override
-    public void showArtificialIntelligenceWin() { System.out.println("Has perdido!"); }
+    public void showTie() {
+        System.out.println(TIE_MESSAGE);
+    }
+
+    private void showInvalidInput() {
+        System.out.println(INVALID_INPUT_MESSAGE);
+    }
 
     @Override
-    public void showTie() { System.out.println("Has empatado!"); }
-
-    @Override
-    public void outPutMessage(String message){ System.out.println(message); }
+    public void showUsedPosition() {
+        System.out.println(USED_POSITION_MESSAGE);
+    }
 }
 
