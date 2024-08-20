@@ -1,22 +1,15 @@
 package org.classes;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class EasyIA implements ArtificialIntelligence {
+public class EasyAI implements MoveMaker {
 
-    private EasyIA easyIA;
-
-    public EasyIA getEasyIA() {
-        if(easyIA == null) easyIA = new EasyIA();
-        return easyIA;
-    }
-    
-//--------------------------------------------------------------------------------------------------------
-    
     public Coordinate selectCell(Board board) {
         List<Coordinate> freePoints = new ArrayList<>();
-        for (int i = 0; i < 3; ++i) 
-            for (int j = 0; j < 3; ++j) {
+        for (int i = 0; board.isBoundRow(i); ++i)
+            for (int j = 0; board.isBoundColumn(j); ++j) {
                 Coordinate coordinate = new Coordinate(i, j);
                 if (board.isFree(coordinate)) freePoints.add(coordinate);
             }

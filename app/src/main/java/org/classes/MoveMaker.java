@@ -1,6 +1,6 @@
 package org.classes;
 
-public interface ArtificialIntelligence {
+public interface MoveMaker {
     Coordinate selectCell(Board board);
 }
 
