@@ -1,11 +1,11 @@
 package org.classes;
 
-public class Board implements GameBoard {
+public final class Board implements GameBoard {
 
-    private final int MAX_ROWS = 3;
-    private final int MAX_COLUMNS = 3;
-    private final int X = 0;
-    private final int O = 1;
+    private static final int MAX_ROWS = 3;
+    private static final int MAX_COLUMNS = 3;
+    private static final int X = 0;
+    private static final int O = 1;
     private final Token[][] board;
 
     public Board() {
@@ -23,8 +23,9 @@ public class Board implements GameBoard {
 
     private boolean checkRows() {
         for (int i = 0; i < MAX_ROWS; i++) {
-            TokenState symbol = board[i][Column.LEFT.ordinal()].fetchSymbol();
-            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol() && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol()){
+            final TokenState symbol = board[i][Column.LEFT.ordinal()].fetchSymbol();
+            if (symbol != null && symbol == board[i][Column.CENTER.ordinal()].fetchSymbol()
+                    && symbol == board[i][Column.RIGHT.ordinal()].fetchSymbol()) {
                 return true;
             }
         }
@@ -34,8 +35,9 @@ public class Board implements GameBoard {
 
     private boolean checkColumns() {
         for (int j = 0; j < MAX_COLUMNS; j++) {
-            TokenState symbol = board[Row.UP.ordinal()][j].fetchSymbol();
-            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol() && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol()){
+            final TokenState symbol = board[Row.UP.ordinal()][j].fetchSymbol();
+            if (symbol != null && symbol == board[Row.MID.ordinal()][j].fetchSymbol()
+                    && symbol == board[Row.DOWN.ordinal()][j].fetchSymbol()) {
                 return true;
             }
         }
@@ -46,7 +48,9 @@ public class Board implements GameBoard {
     private boolean isFull() {
         for (int i = 0; i < MAX_ROWS; i++) {
             for (int j = 0; j < MAX_COLUMNS; j++) {
-                if (board[i][j].fetchSymbol() == null) return false;
+                if (board[i][j].fetchSymbol() == null) {
+                    return false;
+                }
             }
         }
         return true;
@@ -54,15 +58,19 @@ public class Board implements GameBoard {
 
 
     private boolean checkDiagonal() {
-        return (board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null &&
-                board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol() &&
-                board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol() == board[Row.DOWN.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
+        return (board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null
+                && board[Row.UP.ordinal()][Column.LEFT.ordinal()].fetchSymbol()
+                == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol()
+                && board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol()
+                == board[Row.DOWN.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
     }
 
     private boolean checkReverseDiagonal() {
-        return (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null &&
-                board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol()) &&
-                (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() == board[Row.UP.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
+        return (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol() != null
+                && board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol()
+                == board[Row.MID.ordinal()][Column.CENTER.ordinal()].fetchSymbol())
+                && (board[Row.DOWN.ordinal()][Column.LEFT.ordinal()].fetchSymbol()
+                == board[Row.UP.ordinal()][Column.RIGHT.ordinal()].fetchSymbol());
     }
 
     public boolean isFree(Coordinate coordinate) {
@@ -70,24 +78,24 @@ public class Board implements GameBoard {
     }
 
     public GameState isGameOver() {
-        if (checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()){
+        if (checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) {
             return GameState.SOMEONE_WIN;
         }
-        if (isFull()){
+        if (isFull()) {
             return GameState.TIE;
         }
         return GameState.CONTINUE;
     }
 
     public void placeTokenX(Coordinate coordinate, View view) {
-        int x = coordinate.row().ordinal();
-        int y = coordinate.column().ordinal();
+        final int x = coordinate.row().ordinal();
+        final int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_X);
     }
 
     public void placeTokenO(Coordinate coordinate, View view) {
-        int x = coordinate.row().ordinal();
-        int y = coordinate.column().ordinal();
+        final int x = coordinate.row().ordinal();
+        final int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_O);
     }
 
@@ -101,14 +109,14 @@ public class Board implements GameBoard {
 
     @Override
     public boolean isX(Coordinate coordinate) {
-        int x = coordinate.row().ordinal();
-        int y = coordinate.column().ordinal();
+        final int x = coordinate.row().ordinal();
+        final int y = coordinate.column().ordinal();
         return board[x][y].fetchSymbol().ordinal() == X;
     }
 
     public boolean isO(Coordinate coordinate) {
-        int x = coordinate.row().ordinal();
-        int y = coordinate.column().ordinal();
+        final int x = coordinate.row().ordinal();
+        final int y = coordinate.column().ordinal();
         return board[x][y].fetchSymbol().ordinal() == O;
     }
 }
