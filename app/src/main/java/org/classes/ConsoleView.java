@@ -29,8 +29,8 @@ public class ConsoleView implements View {
         }
     }
 
-    private boolean validTokenInput(String token) {
-        return bijection.containsKey(token);
+    private boolean notValidTokenInput(String token) {
+        return !bijection.containsKey(token);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ConsoleView implements View {
         System.out.println("> ");
         String line = scanner.nextLine();
         String[] tokens = line.split(" ");
-        if(!validTokenInput(tokens[0]) || !validTokenInput(tokens[1])) {
+        if(notValidTokenInput(tokens[0]) || notValidTokenInput(tokens[1])) {
             showInvalidInput();
             return receiveMove();
         }
