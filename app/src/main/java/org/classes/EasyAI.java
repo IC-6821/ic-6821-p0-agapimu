@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EasyAI implements MoveMaker {
 
-    public Coordinate selectCell(Board board) {
+    public Coordinate placeToken(Board board) {
         List<Coordinate> freePoints = new ArrayList<>();
         for (int i = 0; board.isBoundRow(i); ++i)
             for (int j = 0; board.isBoundColumn(j); ++j) {
