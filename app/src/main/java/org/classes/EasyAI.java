@@ -11,11 +11,12 @@ public final class EasyAI implements MoveMaker {
         for (int i = 0; board.isBoundRow(i); ++i) {
             for (int j = 0; board.isBoundColumn(j); ++j) {
                 final Coordinate coordinate = new Coordinate(Row.values()[i], Column.values()[j]);
-                if (board.isFree(coordinate)){
+                if (board.isFree(coordinate)) {
                     freePoints.add(coordinate);
                 }
             }
-        }if (freePoints.isEmpty()){
+        }
+        if (freePoints.isEmpty()) {
             return null;
         }
         Collections.shuffle(freePoints);
