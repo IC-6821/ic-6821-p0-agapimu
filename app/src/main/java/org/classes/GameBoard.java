@@ -10,6 +10,8 @@ public interface GameBoard {
     void placeTokenX(Coordinate coordinate, View view);
     void placeTokenO(Coordinate coordinate, View view);
 
-    boolean isX(DefaultToken token);
+    boolean isX(Coordinate coordinate);
+
+    boolean isO(Coordinate coordinate);
 
 }

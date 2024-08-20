@@ -86,8 +86,16 @@ public class Board implements GameBoard {
     }
 
     @Override
-    public boolean isX(DefaultToken token) {
-        return token.fetchSymbol().ordinal() == 0;
+    public boolean isX(Coordinate coordinate) {
+        int x = coordinate.row().ordinal();
+        int y = coordinate.column().ordinal();
+        return board[x][y].fetchSymbol().ordinal() == 0;
+    }
+
+    public boolean isO(Coordinate coordinate) {
+        int x = coordinate.row().ordinal();
+        int y = coordinate.column().ordinal();
+        return board[x][y].fetchSymbol().ordinal() == 1;
     }
 }
 
