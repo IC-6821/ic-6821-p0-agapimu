@@ -2,7 +2,7 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    private Token[][] board;
+    private Token[][] board;.
     final int MAX_ROWS=3;
     final int MAX_COLUMNS=3;
     public Board() {
