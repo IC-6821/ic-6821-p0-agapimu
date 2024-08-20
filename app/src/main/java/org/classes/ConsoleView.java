@@ -24,7 +24,7 @@ public class ConsoleView implements View {
             for(int j=0; gameBoard.isBoundColumn(j); j++){
                 if(j>0) System.out.print("|");
                 Coordinate coordinate=new Coordinate(Row.values()[i], Column.values()[j]);
-                if(!gameBoard.isFree(coordinate)) showEmpty();
+                if(gameBoard.isFree(coordinate)) showEmpty();
                 else if(gameBoard.isX(coordinate)) showX();
                 else if (gameBoard.isO(coordinate)) showO();
             }
