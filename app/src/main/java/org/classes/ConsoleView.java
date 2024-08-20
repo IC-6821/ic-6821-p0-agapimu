@@ -3,7 +3,7 @@ package org.classes;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ConsoleView implements View {
+public final class ConsoleView implements View {
     private final Map<String, Integer> bijection = Map.of("arriba", 0, "medio", 1,
             "abajo", 2, "izquierda", 0, "centro", 1, "derecha", 2);
     private static final String INVALID_INPUT_MESSAGE = "Posición incorrecta";
@@ -27,7 +27,7 @@ public class ConsoleView implements View {
                 if (j > 0) {
                     System.out.print("|");
                 }
-                Coordinate coordinate = new Coordinate(Row.values()[i], Column.values()[j]);
+                final Coordinate coordinate = new Coordinate(Row.values()[i], Column.values()[j]);
                 if (gameBoard.isFree(coordinate)) {
                     showEmpty();
                 }
