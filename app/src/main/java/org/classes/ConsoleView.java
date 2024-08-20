@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class ConsoleView implements View {
     private final Map<String, Integer> bijection = Map.of("arriba", 0, "medio", 1,
             "abajo", 2, "izquierda", 0, "centro", 1, "derecha", 2);
-    private final String INVALID_INPUT_MESSAGE = "Posición incorrecta";
-    private final String PLAYER_WIN_MESSAGE = "Has ganado!";
-    private final String PLAYER_LOST_MESSAGE = "Has perdido!";
-    private final String TIE_MESSAGE = "Has empatado!";
-    private final String USED_POSITION_MESSAGE = "La posición ya está ocupada!";
+    private static final String INVALID_INPUT_MESSAGE = "Posición incorrecta";
+    private static final String PLAYER_WIN_MESSAGE = "Has ganado!";
+    private static final String PLAYER_LOST_MESSAGE = "Has perdido!";
+    private static final String TIE_MESSAGE = "Has empatado!";
+    private static final String USED_POSITION_MESSAGE = "La posición ya está ocupada!";
     private final Scanner scanner;
 
     public ConsoleView() {
