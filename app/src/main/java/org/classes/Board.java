@@ -15,7 +15,7 @@ public class Board implements GameBoard {
     }
 
     public void show(View view){
-        view.showGame(this.board);
+        view.showGame(this);
     }
 
     private boolean checkRows() {
@@ -70,19 +70,11 @@ public class Board implements GameBoard {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_X);
-<<<<<<< HEAD
-=======
-        view.putX(coordinate);
->>>>>>> ae576ca981ec23a657fd45996476b17cc877e629
     }
     public void placeTokenO(Coordinate coordinate, View view) {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
         board[x][y].changeState(TokenState.TOKEN_O);
-<<<<<<< HEAD
-=======
-        view.putO(coordinate);
->>>>>>> ae576ca981ec23a657fd45996476b17cc877e629
     }
 
     public boolean isBoundRow(int x) {
