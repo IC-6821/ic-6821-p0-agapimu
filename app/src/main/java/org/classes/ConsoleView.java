@@ -23,8 +23,8 @@ public class ConsoleView implements View {
             for(int j=0; gameBoard.isBoundColumn(j); j++){
                 Coordinate coordinate=new Coordinate(Row.values()[i], Column.values()[j]);
                 if(gameBoard.isFree(coordinate)) showEmpty();
-                if(gameBoard.isX()) showX();
-                if(gameBoard.isO()) showO();
+                if(gameBoard.isX(coordinate)) showX();
+                if(gameBoard.isO(coordinate)) showO();
             }
         }
     }
