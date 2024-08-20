@@ -30,11 +30,9 @@ public final class ConsoleView implements View {
                 final Coordinate coordinate = new Coordinate(Row.values()[i], Column.values()[j]);
                 if (gameBoard.isFree(coordinate)) {
                     showEmpty();
-                }
-                else if (gameBoard.isX(coordinate)) {
+                } else if (gameBoard.isX(coordinate)) {
                     showX();
-                }
-                else if (gameBoard.isO(coordinate)) {
+                } else if (gameBoard.isO(coordinate)) {
                     showO();
                 }
             }
