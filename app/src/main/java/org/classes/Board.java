@@ -2,9 +2,11 @@ package org.classes;
 
 public class Board implements GameBoard {
 
-    private Token[][] board;
+    final private Token[][] board;
     final int MAX_ROWS=3;
     final int MAX_COLUMNS=3;
+    final int X = 0;
+    final int O = 1;
     public Board() {
         board = new DefaultToken[MAX_ROWS][MAX_COLUMNS];
         for (int i = 0; i < MAX_ROWS; i++) {
@@ -89,13 +91,13 @@ public class Board implements GameBoard {
     public boolean isX(Coordinate coordinate) {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
-        return board[x][y].fetchSymbol().ordinal() == 0;
+        return board[x][y].fetchSymbol().ordinal() == X;
     }
 
     public boolean isO(Coordinate coordinate) {
         int x = coordinate.row().ordinal();
         int y = coordinate.column().ordinal();
-        return board[x][y].fetchSymbol().ordinal() == 1;
+        return board[x][y].fetchSymbol().ordinal() == O;
     }
 }
 

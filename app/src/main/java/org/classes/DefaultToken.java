@@ -2,7 +2,7 @@ package org.classes;
 
 public class DefaultToken implements Token {
 
-    private TokenState state;
+    TokenState state;
 
     @Override
     public void changeState(TokenState symbol) {
