@@ -60,10 +60,10 @@ public class Board implements GameBoard {
         return board[coordinate.row().ordinal()][coordinate.column().ordinal()] != null;
     }
 
-    public int isGameOver() {
-        if(checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return 1;
-        if(isFull()) return 2;
-        return 0;
+    public GameState isGameOver() {
+        if(checkColumns() || checkDiagonal() || checkRows() || checkReverseDiagonal()) return GameState.SOMEONE_WIN;
+        if(isFull()) return GameState.TIE;
+        return GameState.TIE;
     }
 
     public void placeTokenX(Coordinate coordinate, View view) {
@@ -85,5 +85,9 @@ public class Board implements GameBoard {
         return x < MAX_COLUMNS;
     }
 
+    @Override
+    public boolean isX(DefaultToken token) {
+        return token.fetchSymbol().ordinal() == 0;
+    }
 }
 
