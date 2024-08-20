@@ -59,7 +59,7 @@ public class Board implements GameBoard {
     }
 
     public boolean isFree(Coordinate coordinate){
-        return board[coordinate.row().ordinal()][coordinate.column().ordinal()] != null;
+        return board[coordinate.row().ordinal()][coordinate.column().ordinal()].fetchSymbol()!=null;
     }
 
     public GameState isGameOver() {

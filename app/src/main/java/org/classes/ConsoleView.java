@@ -20,12 +20,15 @@ public class ConsoleView implements View {
     @Override
     public void showGame(GameBoard gameBoard) {
         for(int i=0; gameBoard.isBoundRow(i); i++){
+            if(i>0) System.out.println("-----------");
             for(int j=0; gameBoard.isBoundColumn(j); j++){
+                if(j>0) System.out.print("|");
                 Coordinate coordinate=new Coordinate(Row.values()[i], Column.values()[j]);
-                if(gameBoard.isFree(coordinate)) showEmpty();
-                if(gameBoard.isX(coordinate)) showX();
-                if(gameBoard.isO(coordinate)) showO();
+                if(!gameBoard.isFree(coordinate)) showEmpty();
+                else if(gameBoard.isX(coordinate)) showX();
+                else if (gameBoard.isO(coordinate)) showO();
             }
+            System.out.println();
         }
     }
 
@@ -35,7 +38,7 @@ public class ConsoleView implements View {
 
     @Override
     public Coordinate receiveMove() {
-        System.out.println("> ");
+        System.out.print("> ");
         String line = scanner.nextLine();
         String[] tokens = line.split(" ");
         if(notValidTokenInput(tokens[0]) || notValidTokenInput(tokens[1])) {
@@ -48,15 +51,15 @@ public class ConsoleView implements View {
     }
 
     private void showO() {
-        System.out.println(" O ");
+        System.out.print(" O ");
     }
 
     private void showX() {
-        System.out.println(" X ");
+        System.out.print(" X ");
     }
 
     private void showEmpty() {
-        System.out.println("   ");
+        System.out.print("   ");
     }
 
     @Override
